@@ -2,59 +2,51 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Semanur'un Dünyası</title>
-    <style>
-        body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); height: 100vh; }
-        #intro { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 100; transition: opacity 1s ease-out; }
-        #intro h1 { font-size: 5rem; color: #ff758c; text-shadow: 2px 2px 15px rgba(255,117,140,0.4); animation: pop 1s infinite alternate; text-align: center; }
-        #main { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 10; position: relative; }
-        #main h1 { font-size: 6rem; background: -webkit-linear-gradient(#ff758c, #ff7eb3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); }
-        #main p { font-size: 1.8rem; color: #555; max-width: 700px; line-height: 1.6; margin-top: 20px; font-weight: 300; z-index: 10;}
-        .falling-item { position: absolute; animation: fall linear forwards; z-index: 1; opacity: 0.8; font-weight: bold; color: #ff7eb3; }
-        @keyframes pop { from { transform: scale(0.95); } to { transform: scale(1.05); } }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-    </style>
-</head>
-<body>
-
-    <div id="intro">
-        <h1>MERHABA SEMANUR ✨</h1>
-    </div>
-
-    <div id="main">
-        <h1>:)  SEMANUR  :)</h1>
-        <p>Gökyüzünün ışığı... Etrafına en çok da bana şaşkın bakışlar atan GARİP AMA GÜZEL HANIM Bu sayfa tamamen senin için tasarlandı.</p>
-    </div>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Bilgileri | Yasin şekerci</title>
+    <!-- Modern tasarım için TailwindCSS kullanıyoruz -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
-        // Giriş ekranını gizle ve ana ekranı aç
-        setTimeout(() => {
-            const intro = document.getElementById('intro');
-            intro.style.opacity = '0';
-            setTimeout(() => {
-                intro.style.display = 'none';
-                document.getElementById('main').style.display = 'flex';
-                startRain();
-            }, 1000);
-        }, 2500);
-
-        // Yağmur efekti (Emoji ve İsim)
-        function startRain() {
-            const items = ['💖', '✨', '🥰', '🌸', '💫', '😍', 'Semanur', 'Gülücük'];
-            setInterval(() => {
-                const el = document.createElement('div');
-                el.className = 'falling-item';
-                el.innerText = items[Math.floor(Math.random() * items.length)];
-                el.style.left = Math.random() * 100 + 'vw';
-                el.style.top = '-50px';
-                el.style.animationDuration = Math.random() * 3 + 3 + 's';
-                el.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem';
-                document.body.appendChild(el);
+        function kopyala() {
+            // Buradaki IBAN numarasını kendinize göre güncelleyin
+            const iban = "TR72 0015 7000 0000 0157 0274 66"; 
+            navigator.clipboard.writeText(iban).then(() => {
+                const btn = document.getElementById("copyBtn");
+                btn.innerHTML = '<i class="fas fa-check"></i> Kopyalandı';
+                btn.classList.replace("bg-blue-600", "bg-green-500");
+                btn.classList.replace("hover:bg-blue-700", "hover:bg-green-600");
                 
-                // Ekrandan çıkanları temizle
-                setTimeout(() => el.remove(), 6000);
-            }, 150);
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> IBAN Kopyala';
+                    btn.classList.replace("bg-green-500", "bg-blue-600");
+                    btn.classList.replace("hover:bg-green-600", "hover:bg-blue-700");
+                }, 2000);
+            });
         }
     </script>
+</head>
+<body class="bg-slate-100 h-screen flex items-center justify-center font-sans">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full mx-4 text-center">
+        <!-- İkon alanı (İsterseniz logonuzu koyabilirsiniz) -->
+        <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-wallet text-3xl text-blue-600"></i>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-gray-800 mb-1">Yasin Şekerci</h2>
+        <p class="text-gray-500 text-sm mb-6">Banka Ödeme Bilgileri</p>
+        
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6 text-left shadow-inner">
+            <p class="text-xs text-gray-400 uppercase font-semibold mb-1">Banka Adı</p>
+            <p class="text-sm font-medium text-gray-700 mb-4"> BANKA </p>
+            
+            <p class="text-xs text-gray-400 uppercase font-semibold mb-1">IBAN</p>
+            <p class="text-sm font-mono font-bold text-slate-800 break-all">TR72 0015 7000 0000 0157 0274 66</p>
+        </div>
+        
+        <button id="copyBtn" onclick="kopyala()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-300 flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
+            <i class="fas fa-copy"></i> IBAN Kopyala
+        </button>
+    </div>
 </body>
 </html>
